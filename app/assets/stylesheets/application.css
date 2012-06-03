@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+}
+
+#container {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    background: lightgray;
+}
+
+#header h1 {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#header h2 {
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 0px;
+}
+
+label {
+    display: block;
+}
+
+input {
+    display: block;
+}
+
+textarea {
+    display: block;
+}
+
+div.flash.notice {
+    margin-top: 10px;
+    border: 2px solid teal;
+    padding: 10px;
+    background: green;
+    color: white;
+    font-weight: bold;
+}
+
+div.field_with_errors textarea, div.field_with_errors input {
+    border: 1px solid red;
+}
+
+
+div.errors {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-weight: bold;
+    background: maroon;
+    color: white;
+}

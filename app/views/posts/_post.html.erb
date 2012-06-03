@@ -1,0 +1,5 @@
+<h2><%= link_to_unless(current_page?(post), post.title, post) %></h2>
+
+<div>
+  <%= simple_format(post.body) %>
+</div>

@@ -1,0 +1,7 @@
+<h2>Create New Post</h2>
+
+<%= form_for @post do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+
+  <%= submit_tag 'Create' %>
+<% end %>

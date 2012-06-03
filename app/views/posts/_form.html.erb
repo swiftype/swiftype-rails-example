@@ -1,0 +1,17 @@
+<% if f.object.errors.present? %>
+<div class="errors">
+  <p>There were problems saving your post:</p>
+  
+  <ul>
+  <% f.object.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= f.label :title %>
+<%= f.text_field :title %>
+
+<%= f.label :body %>
+<%= f.text_area :body %>

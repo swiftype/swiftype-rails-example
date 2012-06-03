@@ -1,0 +1,8 @@
+<% content_for(:title) { @post.title } %>
+
+<%= render :partial => 'post', :object => @post %>
+
+<div>
+  <%= link_to 'Edit this post', edit_post_path(@post) %>
+  <%= button_to 'Delete this post', post_path(@post), :method => 'delete' %>
+</div>
