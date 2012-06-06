@@ -1,3 +1,5 @@
+//= require_tree .
+
 body {
     margin: 0;
 }
@@ -23,6 +25,16 @@ body {
 #header h2 {
     font-family: Helvetica, Arial, sans-serif;
     padding: 0px;
+}
+
+#header div.left {
+    float: left;
+}
+
+#header div.right {
+    float: right;
+    margin-right: 30px;
+    margin-top: 20px;
 }
 
 label {

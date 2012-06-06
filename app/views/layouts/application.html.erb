@@ -17,8 +17,16 @@
 
 <div id="container">
   <div id="header">
-    <h1><%= link_to_unless(current_page?(root_path), 'My Awesome Blog', root_path) %></h1>
-    <h2>By Random Hacker</h2>
+    <div class="left">
+      <h1><%= link_to_unless(current_page?(root_path), 'My Awesome Blog', root_path) %></h1>
+      <h2>By Random Hacker</h2>
+    </div>
+    <div class="right">
+      <form>
+        <input type='text' id='st-search-input' class='st-search-input'/>
+      </form>
+    </div>
+    <br style="clear: both">
   </div>
 
   <% if flash[:notice] %>
@@ -26,8 +34,23 @@
   <% end %>
 
   <div id="content">
+    <div id="st-results-container" class="st-result-listing"></div>
     <%= yield %>
   </div>
 </div>
+
+<script type="text/javascript">
+$(function() {
+  $('#st-search-input').swiftypeSearch({
+    resultContainingElement: '#st-results-container',
+    engineKey: 'ai1VJsoEpMdtmhDQANyb'
+  });
+  $('#st-search-input').swiftype({
+    suggestFields: 'title',
+    engineKey: 'ai1VJsoEpMdtmhDQANyb'
+  });
+
+});
+</script>
 </body>
 </html>
