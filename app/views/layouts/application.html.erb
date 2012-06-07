@@ -43,11 +43,11 @@
 $(function() {
   $('#st-search-input').swiftypeSearch({
     resultContainingElement: '#st-results-container',
-    engineKey: 'ai1VJsoEpMdtmhDQANyb'
+    engineKey: '<%= ENV['SWIFTYPE_ENGINE_KEY'] %>'
   });
   $('#st-search-input').swiftype({
     suggestFields: 'title',
-    engineKey: 'ai1VJsoEpMdtmhDQANyb'
+    engineKey: '<%= ENV['SWIFTYPE_ENGINE_KEY'] %>'
   });
 
 });
