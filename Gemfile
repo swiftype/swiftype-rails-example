@@ -21,6 +21,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'swiftype-rb', :git => "https://github.com/swiftype/swiftype-rb.git", :require => 'swiftype'
+gem 'swiftype'
 gem 'delayed_job_active_record'
 gem 'thin'
