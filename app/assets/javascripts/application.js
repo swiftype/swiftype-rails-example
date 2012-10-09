@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.swiftype.autocomplete
+//= require jquery.ba-hashchange.min
+//= require jquery.swiftype.search
 //= require_tree .
