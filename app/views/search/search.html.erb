@@ -1,0 +1,19 @@
+<%= form_tag search_path, :method => :get do %>
+  <%= label_tag :q, 'Search:' %> 
+  <%= text_field_tag :q, params[:q] %>
+<% end %>
+
+<% if params[:q] %>
+  <% if @post_results.empty? %>
+    <p>Sorry, there were no results for your query.</p>
+  <% else %>
+    <ul class="search_results">
+      <% @post_results.each do |post_result| %>
+        <li>
+          <h3><%= link_to (post_result.highlight['title'].try(:html_safe) || post_result.title), post_path(post_result.external_id) %></h3>
+          <%= post_result.highlight["body"].try(:html_safe) || post_result.body %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
