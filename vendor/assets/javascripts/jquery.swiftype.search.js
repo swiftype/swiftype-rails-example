@@ -21,7 +21,7 @@
 
 
   window.Swiftype = window.Swiftype || {};
-  Swiftype.root_url = Swiftype.root_url || 'http://api.swiftype.com';
+  Swiftype.root_url = Swiftype.root_url || 'https://api.swiftype.com';
   Swiftype.pingUrl = function (endpoint, callback) {
     var img = new Image();
     img.onload = img.onerror = callback;
@@ -73,12 +73,11 @@
         $contentCache = $this.getContentCache();
 
       var setSearchHash = function (query, page) {
-          location.hash = "stq=" + query + "&stp=" + page;
+          location.hash = "stq=" + encodeURIComponent(query) + "&stp=" + page;
         };
 
       var submitSearch = function (query, options) {
           options = $.extend({
-            per_page: 10,
             page: 1
           }, options);
           var params = {};
@@ -93,41 +92,26 @@
           params['q'] = query;
           params['engine_key'] = config.engineKey;
           params['page'] = options.page;
-          params['per_page'] = options.per_page;
+          params['per_page'] = config.perPage;
 
-          if (config.searchFields !== undefined) {
-            params['search_fields'] = config.searchFields;
-          }
-          if (config.fetchFields !== undefined) {
-            params['fetch_fields'] = config.fetchFields;
-          }
-          if (config.filters !== undefined) {
-            var filters = config.filters;
-            if (typeof filters === 'function') {
-              filters = filters.call();
+          function handleFunctionParam(field) {
+            if (field !== undefined) {
+              var evald = field;
+              if (typeof evald === 'function') {
+                evald = evald.call();
+              }
+              return evald;
             }
-            params['filters'] = filters;
+            return undefined;
           }
-          if (config.documentTypes !== undefined) {
-            params['document_types'] = config.documentTypes;
-          }
-          if (config.functionalBoosts !== undefined) {
-            params['functional_boosts'] = config.functionalBoosts;
-          }
-          if (config.sortField !== undefined) {
-            var sortField = config.sortField;
-            if (typeof sortField === 'function') {
-              sortField = sortField.call();
-            }
-            params['sort_field'] = sortField;
-          }
-          if (config.sortDirection !== undefined) {
-            var sortDirection = config.sortDirection;
-            if (typeof sortDirection === 'function') {
-              sortDirection = sortDirection.call();
-            }
-            params['sort_direction'] = sortDirection;
-          }
+
+          params['search_fields'] = handleFunctionParam(config.searchFields);
+          params['fetch_fields'] = handleFunctionParam(config.fetchFields);
+          params['filters'] = handleFunctionParam(config.filters);
+          params['document_types'] = handleFunctionParam(config.documentTypes);
+          params['functional_boosts'] = handleFunctionParam(config.functionalBoosts);
+          params['sort_field'] = handleFunctionParam(config.sortField);
+          params['sort_direction'] = handleFunctionParam(config.sortDirection);
 
           $.getJSON(Swiftype.root_url + "/api/v1/public/engines/search.json?callback=?", params).success(renderSearchResults);
         };
@@ -193,6 +177,7 @@
     $.each(resultInfo, function(documentType, typeInfo) {
       if (typeInfo.num_pages > maxPages) {
         maxPagesType = documentType;
+        maxPages = typeInfo.num_pages;
       }
     });
     var currentPage = resultInfo[maxPagesType].current_page,
@@ -219,8 +204,12 @@
       return $.trim(str).toLowerCase();
     };
 
+  function htmlEscape(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
   var defaultRenderFunction = function (document_type, item) {
-      return '<div class="st-result"><h3 class="title"><a href="' + item['url'] + '" class="st-search-result-link">' + item['title'] + '</a></h3></div>';
+      return '<div class="st-result"><h3 class="title"><a href="' + item['url'] + '" class="st-search-result-link">' + htmlEscape(item['title']) + '</a></h3></div>';
     };
 
   var defaultLoadingFunction = function(query, $resultContainer) {
@@ -239,6 +228,7 @@
     fetchFields: undefined,
     preRenderFunction: undefined,
     loadingFunction: defaultLoadingFunction,
-    renderFunction: defaultRenderFunction
+    renderFunction: defaultRenderFunction,
+    perPage: 10
   };
 })(jQuery);
