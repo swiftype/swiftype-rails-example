@@ -21,6 +21,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'swiftype'
+gem 'swiftype', '>= 0.0.4'
 gem 'delayed_job_active_record'
 gem 'thin'

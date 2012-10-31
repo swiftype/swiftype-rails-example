@@ -15,5 +15,13 @@
         </li>
       <% end %>
     </ul>
+
+    <% if @result_set.current_page > 1 %>
+      <%= link_to '< previous', search_path(:q => params[:q], :page => @result_set.current_page - 1) %>
+    <% end %>
+    
+    <% if @result_set.num_pages > @result_set.current_page %>
+      <%= link_to 'next >', search_path(:q => params[:q], :page => @result_set.current_page + 1) %>
+    <% end %>
   <% end %>
 <% end %>
