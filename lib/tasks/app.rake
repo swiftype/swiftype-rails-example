@@ -9,8 +9,8 @@ namespace :app do
       abort("SWIFTYPE_ENGINE_SLUG not set")
     end
 
-    engine = Swiftype::Engine.find(ENV['SWIFTYPE_ENGINE_SLUG'])
-    engine.create_document_type(:name => Post.model_name.downcase)
+    client = Swiftype::Easy.new
+    client.create_document_type(ENV['SWIFTYPE_ENGINE_SLUG'], Post.model_name.downcase)
   end
 
   desc "index all posts"
@@ -23,8 +23,7 @@ namespace :app do
       abort("SWIFTYPE_ENGINE_SLUG not set")
     end
 
-    engine = Swiftype::Engine.find(ENV['SWIFTYPE_ENGINE_SLUG'])
-    document_type = engine.document_type(Post.model_name.downcase)
+    client = Swiftype::Easy.new
 
     Post.find_in_batches(:batch_size => 100) do |posts|
       documents = posts.map do |post|
@@ -36,7 +35,7 @@ namespace :app do
                      {:name => 'created_at', :value => post.created_at.iso8601, :type => 'date'}]}
       end
 
-      results = document_type.create_documents(documents)
+      results = client.create_or_update_documents(ENV['SWIFTYPE_ENGINE_SLUG'], Post.model_name.downcase, documents)
 
       results.each_with_index do |result, index|
         puts "Could not create #{posts[index].title} (##{posts[index].id})" if result == false
