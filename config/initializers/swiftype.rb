@@ -1,5 +1,6 @@
-Swiftype.configure do |config|
-  config.api_key = ENV['SWIFTYPE_API_KEY']
-  # for Heroku Addon
-  config.endpoint = ENV['SWIFTYPE_API_ENDPOINT'] if ENV['SWIFTYPE_API_ENDPOINT'] 
+# for Heroku Addon
+if ENV['SWIFTYPE_URL']
+  Swiftype.authenticated_url = ENV['SWIFTYPE_URL']
+else
+  Swiftype.api_key = ENV['SWIFTYPE_API_KEY']
 end

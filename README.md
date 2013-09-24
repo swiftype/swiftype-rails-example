@@ -21,7 +21,7 @@ We have also written a [full tutorial using this application as an example](http
 This demo uses SQLite but with some minor modifications you can get it running on Heroku.
 
 1. Remove the `sqlite3` gem and replace it with the `pg` gem.
-2. Add the Swiftype Add-on to your app: `heroku addons:add swiftype` (NOTE: This add-on is currently in private beta. For access, email support@swiftype.com).
+2. Add the Swiftype Add-on to your app: `heroku addons:add swiftype`
 3. Add the configuration variables `SWIFTYPE_ENGINE_KEY`, `SWIFTYPE_ENGINE_SLUG`, and `DEFAULT_HOST` to your Heroku app with `heroku config:add`.
 4. Create the document type with `heroku run rake app:create_document_type`
 5. Deploy your application.

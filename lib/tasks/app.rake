@@ -9,7 +9,7 @@ namespace :app do
       abort("SWIFTYPE_ENGINE_SLUG not set")
     end
 
-    client = Swiftype::Easy.new
+    client = Swiftype::Client.new
     client.create_document_type(ENV['SWIFTYPE_ENGINE_SLUG'], Post.model_name.downcase)
   end
 
@@ -23,7 +23,7 @@ namespace :app do
       abort("SWIFTYPE_ENGINE_SLUG not set")
     end
 
-    client = Swiftype::Easy.new
+    client = Swiftype::Client.new
 
     Post.find_in_batches(:batch_size => 100) do |posts|
       documents = posts.map do |post|
