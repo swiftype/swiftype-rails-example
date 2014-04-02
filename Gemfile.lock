@@ -122,6 +122,6 @@ DEPENDENCIES
   rails (~> 3.2.5)
   sass-rails (~> 3.2.3)
   sqlite3
-  swiftype (~> 1.0.0)
+  swiftype (~> 1.0)
   thin
   uglifier (>= 1.0.3)
