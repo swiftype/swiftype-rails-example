@@ -1,6 +1,6 @@
 # Swiftype Rails Integration Demo Application
 
-This is a simple Rails 3 application that publishes changes to a
+This is a simple Rails 4 application that publishes changes to a
 [Swiftype](http://swiftype.com/) search engine via the API using the
 [swiftype gem](https://github.com/swiftype/swiftype-rb) and displays
 results using the [jQuery search plugin](https://github.com/swiftype/swiftype-autocomplete-jquery)
