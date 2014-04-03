@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post])
+    @post = Post.new(post_params)
     if @post.save
       redirect_to @post, notice: "New post created"
     else
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if @post.update_attributes(params[:post])
+    if @post.update_attributes(post_params)
       redirect_to @post, notice: "Post updated"
     else
       render :edit
@@ -37,5 +37,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to root_path
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :body)
   end
 end
