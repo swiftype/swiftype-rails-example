@@ -43,5 +43,8 @@ module SwiftypeIntegrationDemo
     # This is necessary if your schema can't be completely dumped by the schema dumper,
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
+
+    #Use Delayed Job as ActiveJob's queue backend.
+    config.active_job.queue_adapter = :delayed_job
   end
 end

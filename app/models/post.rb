@@ -2,16 +2,16 @@ class Post < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :body
 
-  after_save :enqueue_create_or_update_document_job
-  after_destroy :enqueue_delete_document_job
+  after_save :create_swiftype_document
+#  before_destroy :destroy_swiftype_document # This does not work. I have yet to figure out why.
 
   private
-
-  def enqueue_create_or_update_document_job
-    Delayed::Job.enqueue CreateOrUpdateSwiftypeDocumentJob.new(self.id)
+    
+  def create_swiftype_document
+      UpdateSwiftypeJob.perform_later(self)
   end
-
-  def enqueue_delete_document_job
-    Delayed::Job.enqueue DeleteSwiftypeDocumentJob.new(self.id)
-  end
+    
+#  def destroy_swiftype_document
+#      DestroySwiftypeJob.perform_now(self) # Does not work!
+#  end  
 end
