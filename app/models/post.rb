@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :body
 
   after_save :create_swiftype_document
-  before_destroy :destroy_swiftype_document
+  after_destroy :destroy_swiftype_document
 
   private
   def create_swiftype_document

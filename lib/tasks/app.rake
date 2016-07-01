@@ -10,7 +10,7 @@ namespace :app do
     end
 
     client = Swiftype::Client.new
-    client.create_document_type(ENV['SWIFTYPE_ENGINE_SLUG'], Post.model_name.downcase)
+    client.create_document_type(ENV['SWIFTYPE_ENGINE_SLUG'], Post.model_name.singular)
   end
 
   desc "index all posts"
@@ -35,7 +35,7 @@ namespace :app do
                      {:name => 'created_at', :value => post.created_at.iso8601, :type => 'date'}]}
       end
 
-      results = client.create_or_update_documents(ENV['SWIFTYPE_ENGINE_SLUG'], Post.model_name.downcase, documents)
+      results = client.create_or_update_documents(ENV['SWIFTYPE_ENGINE_SLUG'], Post.model_name.singular, documents)
 
       results.each_with_index do |result, index|
         puts "Could not create #{posts[index].title} (##{posts[index].id})" if result == false
