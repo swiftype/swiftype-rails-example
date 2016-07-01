@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post, notice: "New post created"
     else
-      render :new
+      render 'new'
     end
   end
 
@@ -26,10 +26,10 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if @post.update_attributes(post_params)
+    if @post.update(post_params)
       redirect_to @post, notice: "Post updated"
     else
-      render :edit
+      render 'edit'
     end
   end
 

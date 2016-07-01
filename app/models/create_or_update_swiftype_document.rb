@@ -1,10 +1,15 @@
-class CreateOrUpdateSwiftypeDocumentJob < Struct.new(:post_id)
-  def perform
-    post = Post.find(post_id)
+class CreateOrUpdateSwiftypeDocument
+  attr_reader :post
+  
+  def initialize(post)
+    @post = post
+  end
+  
+  def run  
     url = Rails.application.routes.url_helpers.post_url(post)
     client = Swiftype::Client.new
     client.create_or_update_document(ENV['SWIFTYPE_ENGINE_SLUG'],
-                                     Post.model_name.name.downcase,
+                                     post.model_name.singular, #This assumes that the your engine uses "post" as a document type. You can replace it with any document type defined in your engine
                                      {:external_id => post.id,
                                        :fields => [{:name => 'title', :value => post.title, :type => 'string'},
                                                    {:name => 'body', :value => post.body, :type => 'text'},

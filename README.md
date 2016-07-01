@@ -13,7 +13,7 @@ We have also written a [full tutorial using this application as an example](http
 1. Sign up for a [Swiftype account](http://swiftype.com/), then create an API based engine with a Document Type called "post".
 2. Clone this repository and run `bundle install`, `rake db:create`, and `rake db:migrate`.
 3. Create a `.env` file with your Swiftype API key, engine key, engine slug, and default host (see `.env.example`).
-4. Install the `foreman` gem.
+4. Install the `foreman` gem using `gem install foreman`.
 5. Run the demo with `foreman start`.
 
 ## Running on Heroku

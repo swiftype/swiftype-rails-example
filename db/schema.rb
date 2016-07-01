@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20120603225739) do
 
-  create_table "delayed_jobs", force: true do |t|
+  create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0
     t.integer  "attempts",   default: 0
     t.text     "handler"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20120603225739) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
-  create_table "posts", force: true do |t|
+  create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.string   "body"
     t.datetime "created_at"
