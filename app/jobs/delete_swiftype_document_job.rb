@@ -1,8 +1,8 @@
 class DeleteSwiftypeDocumentJob < ActiveJob::Base
   queue_as :default
 
-  def perform(*args) #This probably doesn't need to be *args? 
+  def perform(post_id)
     # Remove documents from index
-    DeleteSwiftypeDocuments.new(post).run
+    DeleteSwiftypeDocument.new(post_id).run
   end
 end
