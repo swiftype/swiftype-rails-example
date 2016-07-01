@@ -13,7 +13,7 @@ class CreateOrUpdateSwiftypeDocument
                                      {:external_id => post.id,
                                        :fields => [{:name => 'title', :value => post.title, :type => 'string'},
                                                    {:name => 'body', :value => post.body, :type => 'text'},
-                                                   {:name => 'url', :value => url, :type => 'enum'}, #Uncomment the url route, and remove the single quotes from :value => 'url' to have rails pass the url.
+                                                   {:name => 'url', :value => url, :type => 'enum'},
                                                    {:name => 'created_at', :value => post.created_at.iso8601, :type => 'date'}]})
   end
 end
